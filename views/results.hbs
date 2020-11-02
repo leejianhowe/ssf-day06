@@ -1,37 +1,47 @@
+<h1>Search for {{searchQuery}}</h1>
 {{#if records}}
-<table>
-  <thead>
-    <th>App_id</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Rating</th>
-    <th>No. of installs</th>
-  </thead>
-  {{#each records}}
-    <tr>
-      <td>{{this.app_id}}</td>
-      <td>{{this.name}}</td>
-      <td>{{this.category}}</td>
-      <td>{{this.rating}}</td>
-      <td>{{this.installs}}</td>
-    </tr>
-  {{/each}}
+  <table>
+    <thead>
+      <th>App_id</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Rating</th>
+      <th>No. of installs</th>
+    </thead>
+    {{#each records}}
+      <tr>
+        <td>{{this.app_id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.category}}</td>
+        <td>{{this.rating}}</td>
+        <td>{{this.installs}}</td>
+      </tr>
+    {{/each}}
+  </table>
+  <div class="row">
+    <!-- check to see if showButtonBack is true for back button -->
+    {{#if showButtonBack}}
+      <form class="form-group" action="/search" method="get">
 
-</table>
+        <input type="hidden" name="searchQuery" value="{{searchQuery}}">
+        <input type="hidden" name="offSet" value="{{offSetBack}}">
+        <input type="hidden" name="numberPerPage" value="{{numberPerPage}}">
+        <button type="submit">Back</button>
+      </form>
+    {{/if}}
 
-<form class="" action="/search" method="get">
-  <input type="hidden" name="offset" value="-10">
-  <input type="hidden" name="searchQuery" value="{{searchQuery}}">
-  <button type="submit">Back</button>
-</form>
-
-<form class="" action="/search" method="get">
-  <input type="hidden" name="offset" value="10">
-  <input type="hidden" name="searchQuery" value="{{searchQuery}}">
-  <button type="submit">Next</button>
-</form>
+    <!-- if showButtonNext true -->
+    {{#if showButtonNext}}
+      <form class="" action="/search" method="get">
+        <input type="hidden" name="searchQuery" value="{{searchQuery}}">
+        <input type="hidden" name="offSet" value="{{offSetNext}}">
+        <input type="hidden" name="numberPerPage" value="{{numberPerPage}}">
+        <button type="submit">Next</button>
+      </form>
+    {{/if}}
+  </div>
 {{else}}
-<h1>No results</h1>
+  <h2>No results</h1>
 {{/if}}
 <!-- add two buttons to move the page -->
 <!-- limit and offset -->
